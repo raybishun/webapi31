@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "OU7LPbPL59SjsEK2w8avjmQcv3dFexkWSZ0ucn9MVWxhZDhQRPVZCNyLahfcnyUhd4gKgnb62FRs4TU0nOA19w==",
+  "dgSpecHash": "WbU7GncnzDXSe0pnkHTNbvB9+wCQ4LolYWVtUvcHcjfWFeIb5HhRhAKUrhrKfprpUGpXrvsszgHhE79b34L39g==",
   "success": true,
-  "projectFilePath": "C:\\BBIS\\OneDrive - Bits & Bytes Information Systems, LLC\\dev\\webapicore31_skillshare\\MeetupAPI\\MeetupAPI\\MeetupAPI.csproj",
+  "projectFilePath": "C:\\BBIS\\OneDrive - Bits & Bytes Information Systems, LLC\\dev\\git\\webapi31\\MeetupAPI\\MeetupAPI\\MeetupAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Ray\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
     "C:\\Users\\Ray\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

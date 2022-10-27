@@ -50,6 +50,10 @@ namespace MeetupAPI
                 };
             });
 
+            services.AddAuthorization(options => {
+                options.AddPolicy("HasNationality", builder => builder.RequireClaim("Nationality", "German", "English"));
+            });
+
             services.AddScoped<IJwtProvider, JwtProvider>();
             services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
             services.AddControllers().AddFluentValidation();

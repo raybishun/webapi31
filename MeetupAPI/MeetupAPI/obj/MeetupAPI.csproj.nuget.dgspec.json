@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\BBIS\\OneDrive - Bits & Bytes Information Systems, LLC\\dev\\webapicore31_skillshare\\MeetupAPI\\MeetupAPI\\MeetupAPI.csproj": {}
+    "C:\\BBIS\\OneDrive - Bits & Bytes Information Systems, LLC\\dev\\git\\webapi31\\MeetupAPI\\MeetupAPI\\MeetupAPI.csproj": {}
   },
   "projects": {
-    "C:\\BBIS\\OneDrive - Bits & Bytes Information Systems, LLC\\dev\\webapicore31_skillshare\\MeetupAPI\\MeetupAPI\\MeetupAPI.csproj": {
+    "C:\\BBIS\\OneDrive - Bits & Bytes Information Systems, LLC\\dev\\git\\webapi31\\MeetupAPI\\MeetupAPI\\MeetupAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\BBIS\\OneDrive - Bits & Bytes Information Systems, LLC\\dev\\webapicore31_skillshare\\MeetupAPI\\MeetupAPI\\MeetupAPI.csproj",
+        "projectUniqueName": "C:\\BBIS\\OneDrive - Bits & Bytes Information Systems, LLC\\dev\\git\\webapi31\\MeetupAPI\\MeetupAPI\\MeetupAPI.csproj",
         "projectName": "MeetupAPI",
-        "projectPath": "C:\\BBIS\\OneDrive - Bits & Bytes Information Systems, LLC\\dev\\webapicore31_skillshare\\MeetupAPI\\MeetupAPI\\MeetupAPI.csproj",
+        "projectPath": "C:\\BBIS\\OneDrive - Bits & Bytes Information Systems, LLC\\dev\\git\\webapi31\\MeetupAPI\\MeetupAPI\\MeetupAPI.csproj",
         "packagesPath": "C:\\Users\\Ray\\.nuget\\packages\\",
-        "outputPath": "C:\\BBIS\\OneDrive - Bits & Bytes Information Systems, LLC\\dev\\webapicore31_skillshare\\MeetupAPI\\MeetupAPI\\obj\\",
+        "outputPath": "C:\\BBIS\\OneDrive - Bits & Bytes Information Systems, LLC\\dev\\git\\webapi31\\MeetupAPI\\MeetupAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
