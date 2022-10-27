@@ -1,9 +1,11 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using MeetupAPI.Authorization;
 using MeetupAPI.Entities;
 using MeetupAPI.Identity;
 using MeetupAPI.Models;
 using MeetupAPI.Validators;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -52,8 +54,10 @@ namespace MeetupAPI
 
             services.AddAuthorization(options => {
                 options.AddPolicy("HasNationality", builder => builder.RequireClaim("Nationality", "German", "English"));
+                options.AddPolicy("AtLeast18", builder => builder.AddRequirements(new MinimumAgeRequirement(18)));
             });
 
+            services.AddScoped<IAuthorizationHandler, MinimumAgeHandler>();
             services.AddScoped<IJwtProvider, JwtProvider>();
             services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
             services.AddControllers().AddFluentValidation();
