@@ -1,6 +1,7 @@
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using MeetupAPI.Authorization;
+using MeetupAPI.Controllers.Filters;
 using MeetupAPI.Entities;
 using MeetupAPI.Identity;
 using MeetupAPI.Models;
@@ -57,11 +58,12 @@ namespace MeetupAPI
                 options.AddPolicy("AtLeast18", builder => builder.AddRequirements(new MinimumAgeRequirement(18)));
             });
 
+            services.AddScoped<TimeTrackFilter>();
             services.AddScoped<IAuthorizationHandler, MeetupResourceOperationHandler>();
             services.AddScoped<IAuthorizationHandler, MinimumAgeHandler>();
             services.AddScoped<IJwtProvider, JwtProvider>();
             services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
-            services.AddControllers().AddFluentValidation();
+            services.AddControllers(options => options.Filters.Add(typeof(ExceptionFilter))).AddFluentValidation();
             services.AddScoped<IValidator<RegisterUserDto>, RegisterUserValidator>();
             services.AddDbContext<MeetupContext>();
             services.AddScoped<MeetupSeeder>();
