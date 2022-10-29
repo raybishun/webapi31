@@ -18,6 +18,9 @@ namespace MeetupAPI.Entities
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Meetup>()
+                .HasOne(c => c.CreatedBy);
+            
             modelBuilder.Entity<User>()
                 .HasOne(u => u.Role);
             

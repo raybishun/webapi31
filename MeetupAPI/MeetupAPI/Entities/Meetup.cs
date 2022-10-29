@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MeetupAPI.Entities
 {
@@ -15,5 +13,8 @@ namespace MeetupAPI.Entities
 
         public virtual Location Location { get; set; }
         public virtual List<Lecture> Lectures { get; set; }
+
+        public int? CreatedById { get; set; }
+        public User CreatedBy { get; set; }
     }
 }
