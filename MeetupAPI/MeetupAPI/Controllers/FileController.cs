@@ -1,27 +1,22 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MeetupAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     [Authorize]
     public class FileController : ControllerBase
     {
+        [ResponseCache(Duration = 1200, VaryByQueryKeys = new[] {"name"})]
         [HttpGet]
         public ActionResult GetFile(string name)
         {
             var rootFolder = Directory.GetCurrentDirectory();
-            // var fileFullPath = $"{rootFolder}/PrivateAssets/{name}";
-            var fileFullPath = rootFolder + "/PrivateAssets/" + name;
-
+            var fileFullPath = $"{rootFolder}/PrivateAssets/{name}";
+            
             if (!System.IO.File.Exists(fileFullPath))
             {
                 return NotFound();
