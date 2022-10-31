@@ -25,7 +25,6 @@ namespace MeetupAPI.Controllers
             try
             {
                 ((IConfigurationRoot)_configuration).Reload();
-                
                 return Ok();
             }
             catch (Exception)
