@@ -34,7 +34,7 @@ namespace MeetupAPI.Controllers
         [HttpGet]
         [AllowAnonymous]
         // [NationalityFilter("German,Russian")]
-        public ActionResult<List<MeetupDetailsDto>> Get()
+        public ActionResult<List<MeetupDetailsDto>> GetAll([FromQuery]string searchPhrase)
         {
             #region Note
             // 3 ways to return our own status codes (other than leave it to .net to return the default)
@@ -51,7 +51,10 @@ namespace MeetupAPI.Controllers
             //return meetups;
             #endregion
 
-            var meetups = _meetupContext.Meetups.Include(m => m.Location).ToList();
+            var meetups = _meetupContext.Meetups
+                .Include(m => m.Location)
+                .Where(m => searchPhrase == null || (m.Organizer.ToLower().Contains(searchPhrase) || m.Name.ToLower().Contains(searchPhrase)))
+                .ToList();
             var meetupDtos = _mapper.Map<List<MeetupDetailsDto>>(meetups);
             return Ok(meetupDtos);
         }
