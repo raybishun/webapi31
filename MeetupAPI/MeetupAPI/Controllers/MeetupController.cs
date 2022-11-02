@@ -51,6 +51,11 @@ namespace MeetupAPI.Controllers
             //return meetups;
             #endregion
 
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
             var baseQuery = _meetupContext.Meetups
                 .Include(m => m.Location)
                 .Where(m => query.SearchPhrase == null ||
