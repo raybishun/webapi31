@@ -6,8 +6,10 @@ using MeetupAPI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Security.Claims;
 
 namespace MeetupAPI.Controllers
@@ -59,8 +61,24 @@ namespace MeetupAPI.Controllers
             var baseQuery = _meetupContext.Meetups
                 .Include(m => m.Location)
                 .Where(m => query.SearchPhrase == null ||
-                    (m.Organizer.ToLower().Contains(query.SearchPhrase) || 
-                    m.Name.ToLower().Contains(query.SearchPhrase)));
+                            (m.Organizer.ToLower().Contains(query.SearchPhrase) || 
+                            m.Name.ToLower().Contains(query.SearchPhrase)));
+
+            if (!string.IsNullOrEmpty(query.SortBy))
+            {
+                var propertySelectors = new Dictionary<string, Expression<Func<Meetup, object>>>()
+                {
+                    { nameof(Meetup.Name), meetup => meetup.Name },
+                    { nameof(Meetup.Date), meetup => meetup.Date },
+                    { nameof(Meetup.Organizer), meetup => meetup.Organizer }
+                };
+
+                var propertySelector = propertySelectors[query.SortBy];
+
+                baseQuery = query.SortDirection == SortDirection.ASC
+                    ? baseQuery.OrderBy(propertySelector)
+                    : baseQuery.OrderByDescending(propertySelector);
+            }
 
             var meetups = baseQuery
                 .Skip(query.PageSize * (query.PageNumber -1))
