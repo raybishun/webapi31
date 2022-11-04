@@ -81,8 +81,8 @@ namespace MeetupAPI.Controllers
             }
 
             var meetups = baseQuery
-                .Skip(query.PageSize * (query.PageNumber -1))
                 .Take(query.PageSize)
+                .Skip(query.PageSize * (query.PageNumber -1))
                 .ToList();
 
             var totalCount = baseQuery.Count();
