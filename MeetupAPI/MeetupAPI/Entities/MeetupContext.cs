@@ -1,14 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace MeetupAPI.Entities
 {
     public class MeetupContext : DbContext
     {
-        private readonly string _conStr = @"Data Source=X1EXTREME\SQLEXPRESS;Database=MeetupDb;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        public MeetupContext(DbContextOptions<MeetupContext> options) : base(options) { }
 
         public DbSet<Role> Roles { get; set; }
         public DbSet<User> Users { get; set; }
@@ -32,11 +28,6 @@ namespace MeetupAPI.Entities
             modelBuilder.Entity<Meetup>()
                 .HasMany(m => m.Lectures)
                 .WithOne(l => l.Meetup);
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(_conStr);
         }
     }
 }

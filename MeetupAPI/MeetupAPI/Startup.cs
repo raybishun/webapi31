@@ -10,11 +10,14 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System;
+using System.Linq;
 using System.Text;
 // using Swashbuckle.AspNetCore.Swagger;
 
@@ -66,7 +69,8 @@ namespace MeetupAPI
             services.AddControllers(options => options.Filters.Add(typeof(ExceptionFilter))).AddFluentValidation();
             services.AddScoped<IValidator<RegisterUserDto>, RegisterUserValidator>();
             services.AddScoped<IValidator<MeetupQuery>, MeetupQueryValidator>();
-            services.AddDbContext<MeetupContext>();
+            // services.AddDbContext<MeetupContext>();
+            services.AddDbContext<MeetupContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<MeetupSeeder>();
             services.AddAutoMapper(this.GetType().Assembly);
             services.AddSwaggerGen(c =>
@@ -79,8 +83,10 @@ namespace MeetupAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, MeetupSeeder meetupSeeder)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, MeetupSeeder meetupSeeder, MeetupContext context)
         {
+            RunMigrations(context);
+
             app.UseResponseCaching();
             app.UseStaticFiles();
             app.UseCors("FrontEndClient");
@@ -114,6 +120,20 @@ namespace MeetupAPI
             });
 
             meetupSeeder.Seed();
+        }
+
+        /// <summary>
+        /// Automatically run migrations when needed.
+        /// </summary>
+        /// <param name="context"></param>
+        private void RunMigrations(MeetupContext context)
+        {
+            var pendingMigrations = context.Database.GetPendingMigrations();
+
+            if (pendingMigrations.Any())
+            {
+                context.Database.Migrate();
+            }
         }
     }
 }

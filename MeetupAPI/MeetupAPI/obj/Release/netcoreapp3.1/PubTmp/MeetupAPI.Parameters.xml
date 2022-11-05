@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="meetup-api31" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\BBIS\\OneDrive\ -\ Bits\ &amp;\ Bytes\ Information\ Systems,\ LLC\\dev\\git\\webapi31\\MeetupAPI\\MeetupAPI\\obj\\Release\\netcoreapp3\.1\\PubTmp\\Out\\$" />
+  </parameter>
+</parameters>
